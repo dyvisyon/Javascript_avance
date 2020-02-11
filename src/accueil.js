@@ -1,29 +1,23 @@
 import React from "react";
-import { Component } from "react";
 
-export default class Accueil extends Component{
-    constructor (props){
-        super(props);
-        this.state = this.prop;
-
+export default class Accueil extends React.Component{
+    constructor({propsChild}) {
+        super();
+        this.state = {
+            stateChild: propsChild
+        };
     }
 
-
-
+    componentDidUpdate({propsChild}) {
+        this.setState({...this.state, propsChild});
+    }
 
     render(){
-        
-        function DisplayName({ name }) {
-               return <p>Hello {name} !</p>
-            } 
-    
-    
+        const { stateChild } = this.state;
         return (
             <div>
-                <DisplayName name={this.prop}/>
-                
+                <p>Hello {stateChild}!</p>
             </div>
-            
         );
     }
 }

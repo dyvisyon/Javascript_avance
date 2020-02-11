@@ -5,14 +5,26 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { render } from "@testing-library/react";
 import Apropos from './apropos';
 import Accueil from './accueil';
 import Config from './config';
 
 
-export default function App() {
-  //render(){
+export default class App extends React.Component {
+  constructor(...props) {
+    super(...props);
+    this.state = {
+      StateParent: ''
+    };
+  }
+
+  exampleApp = (e) => {
+    console.log('console app : ', e);
+    this.setState({...this.state, StateParent:e});
+  }
+
+
+  render() {
     return (
       <Router>
         <div>
@@ -33,10 +45,10 @@ export default function App() {
         
           <Switch>
             <Route exact path="/">
-              <Accueil />
+              <Accueil propsChild={this.state.StateParent} />
             </Route>
-            <Route path="/config">
-              <Config />
+            <Route path="/config" >
+              <Config propsChild={this.exampleApp}/>
             </Route>
             <Route path="/apropos">
               <Apropos />
@@ -44,8 +56,7 @@ export default function App() {
           </Switch>
         </div>
       </Router>
-    );
+    );  
   }
-//}  
-
+}
 
